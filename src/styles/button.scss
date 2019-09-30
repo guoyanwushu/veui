@@ -1,0 +1,23 @@
+button {
+  border: none;
+  outline: none;
+  background-color: #fff;
+  cursor: pointer;
+}
+.btn {
+  -webkit-tap-highlight-color: transparent;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  display: inline-block;
+  padding: 5px 10px;
+}
+.btn-default {
+  background-color: #fff;
+  color: #000;
+}
+.btn-primary {
+  background-color: #409eff;
+  color: #fff;
+  border-color: #409eff;
+}
+
