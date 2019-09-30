@@ -2,6 +2,7 @@
   <div class="container-full">
     <header>
       <button class="btn btn-primary" @click="alertMessage">弹出</button>
+      <button class="btn btn-primary" @click="alertMessage2">弹出</button>
     </header>
     <article>
       <aside class="col-3">
@@ -29,6 +30,13 @@
           title: '支付确认',
           type: 'warning',
           content: '确认支付302元购买当前物品?'
+        })
+      },
+      alertMessage2 () {
+        messageBox({
+          title: '确认删除么',
+          type: 'info',
+          content: '将会删除当前购物车?'
         })
       }
     }
