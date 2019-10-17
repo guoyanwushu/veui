@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import layout from './views/layout'
+import Test from './views/Test'
 Vue.use(Router)
 
 export default new Router({
@@ -9,6 +10,10 @@ export default new Router({
       path: '/',
       name: 'layout',
       component: layout
+    },
+    {
+      path: '/test',
+      component: Test
     },
     {
       path: '/about',

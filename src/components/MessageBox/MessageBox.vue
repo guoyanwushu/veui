@@ -1,10 +1,10 @@
 <template>
   <transition name="show">
-    <div class="message-container" v-show="visible">
+    <div class="message-container" v-show="visible" @click.self="handleWrapperClick">
         <div class="message-box">
           <p class="message-header">
             <span class="message-title">{{title}}</span>
-            <i @click="closeBox">X</i>
+            <i @click="closeBox" v-if="showCloseButton">X</i>
           </p>
           <div class="message-content">
             <i class="iconfont type"
@@ -15,20 +15,23 @@
             {{content}}
           </div>
           <div class="message-options">
-            <button class="btn btn-default" @click="closeBox">{{buttonCancelText}}</button>
-            <button class="btn btn-primary" @click="">{{buttonOkText}}</button>
+            <el-button  @click.native="closeBox" v-if="showCancelButton">{{cancelButtonText || '取消'}}</el-button>
+            <el-button  @click.native="confirmBox" v-if="showConfirmButton" :type="'primary'">{{confirmButtonText || '确定'}}</el-button>
           </div>
         </div>
     </div>
   </transition>
 </template>
 <script>
+  import ElButton from "../Button/index";
+
   /**
    * 类型: 错误 警告 信息 成功反馈
    * 自动关闭 点击确认后关闭并执行回调 确认后直接关闭不执行回调
    * 带标题和内容
    */
   export default {
+    components: {ElButton},
     name: 'alert',
     data() {
       return {
@@ -45,18 +48,44 @@
       },
       title: String,
       callback: Function,
-      buttonOkText: {
-        type: String,
-        default: '确认'
+      cancelButtonText: String,
+      confirmButtonText: String,
+      showCloseButton: {
+        type: Boolean,
+        default: true
       },
-      buttonCancelText: {
-        type: String,
-        default: '取消'
-      }
+      showCancelButton: {
+        type: Boolean,
+        default: true
+      },
+      showConfirmButton: {
+        type: Boolean,
+        default: false
+      },
+      closeOnClickModal: {
+        type: Boolean,
+        default: true
+      },
     },
     methods: {
       closeBox() {
-        this.visible = false;
+        this.visible = false
+      },
+      confirmBox () {
+        this.visible = false
+        if (this.callback) {
+          callback();
+        }
+      }
+    },
+    doClose () {
+      if ('') {
+
+      }
+    },
+    handleWrapperClick () {
+      if (this.closeOnClickModal) {
+        this.visible = false
       }
     }
   }

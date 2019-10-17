@@ -1,0 +1,14 @@
+// theme-color  遵循类型-状态的命名规则
+$--color--white: #fff !default;
+$--color--black: #000 !default;
+$--color--primary: #409EFF !default;
+  /// color|1|Functional Color|1
+$--color-success: #67C23A !default;
+/// color|1|Functional Color|1
+$--color-warning: #E6A23C !default;
+/// color|1|Functional Color|1
+$--color-danger: #F56C6C !default;
+/// color|1|Functional Color|1
+$--color-info: #909399 !default;
+
+$--button-active-shade-percent: 30%

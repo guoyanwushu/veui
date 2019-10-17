@@ -1,0 +1,22 @@
+@import "../variable";
+@mixin button-plain ($color) {
+  background-color: $color;
+  border-color: $color;
+  color: $--color--white;
+  &:hover {
+    background-color: mix($--color--white, $color, 20%);
+    border-color: mix($--color--white, $color, 60%);
+    color: $--color--white;
+  }
+  &:active {
+    background: mix($--color--black, $color, $--button-active-shade-percent);
+    border-color: mix($--color--black, $color, $--button-active-shade-percent);
+    color: $--color--white;
+    outline: none;
+  }
+  &.isdisabled {
+    background: mix($--color--white, $color, 30%);
+    border-color: mix($--color--white, $color, 50%);
+    color: $--color--white;
+  }
+}

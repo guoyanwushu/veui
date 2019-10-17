@@ -1,8 +1,8 @@
 <template>
   <div class="container-full">
     <header>
-      <button class="btn btn-primary" @click="alertMessage">弹出</button>
-      <button class="btn btn-primary" @click="alertMessage2">弹出</button>
+      <v-button icon="icon-jinggao" type="primary" disabled="">弹出</v-button>
+      <v-button @click="alertMessage2" type="warning">弹出</v-button>
     </header>
     <article>
       <aside class="col-3">
@@ -20,17 +20,31 @@
 </template>
 <script>
   import messageBox from '../components/MessageBox/index'
+  import VButton from '../components/Button/index'
   export default  {
+    data () {
+      return {
+        status: false
+      }
+    },
     mounted () {
 
     },
+    components: {
+      VButton
+    },
     methods: {
       alertMessage () {
-        messageBox({
+        this.status = true;
+        setTimeout(() => {
+          console.log('hello world')
+          this.status = false
+        }, 2000);
+        /*messageBox({
           title: '支付确认',
           type: 'warning',
           content: '确认支付302元购买当前物品?'
-        })
+        })*/
       },
       alertMessage2 () {
         messageBox({

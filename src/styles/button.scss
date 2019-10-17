@@ -1,23 +1,58 @@
+@import "variable";
+@import "mixins/button";
 button {
   border: none;
   outline: none;
   background-color: #fff;
   cursor: pointer;
 }
-.btn {
+.v-button {
   -webkit-tap-highlight-color: transparent;
   border: 1px solid #ccc;
   border-radius: 3px;
   display: inline-block;
   padding: 5px 10px;
+  &.isLoading {
+    pointer-events: none;
+  }
+  &.isdisabled {
+    cursor: not-allowed;
+  }
+  .iconfont {
+    display: inline-block;
+    position: relative;
+    font-size: 14px;
+    margin-right: 5px;
+  }
+  .loading {
+    height: 14px;
+    transform-origin: center center;
+    animation: rotating 4s linear infinite;
+  }
 }
-.btn-default {
-  background-color: #fff;
-  color: #000;
+@keyframes rotating {
+  from {
+    transform-origin: center center;
+    transform: rotate(0deg);
+  }
+  to {
+    transform-origin: center center;
+    transform: rotate(360deg);
+  }
 }
-.btn-primary {
-  background-color: #409eff;
-  color: #fff;
-  border-color: #409eff;
+.v-icon-right {
+  padding-left: 5px;
+}
+.v--button--default {
+  @include button-plain($--color-info)
+}
+.v--button--primary {
+  @include button-plain($--color--primary)
+}
+.v--button--warning {
+  @include button-plain($--color-warning)
+}
+.v--button--danger {
+  @include button-plain($--color-danger)
 }
 
