@@ -5,21 +5,48 @@
     <e-radio label="orange" v-model="fruit">橘子(小)</e-radio>
     <input type="radio" v-model="testRad" value="hello">
     <input type="radio" v-model="testRad" value="world">
+    <e-tree :treeData="treeData" @clickNode="handleClickNode"></e-tree>
   </div>
 </template>
 <script>
   import EInput from '../components/EInput/input'
   import ERadio from '../components/ERadio/main'
+  import ETree from '../components/ETree/main'
   export default {
     data () {
       return {
         fruit: 'apple',
-        testRad: 'hello'
+        testRad: 'hello',
+        treeData: [{
+          id: 1,
+          label: '根节点',
+          children: [
+            {
+              id: 2,
+              label: '子节点'
+            },
+            {
+              id: 3,
+              label: '子节点2',
+              spread: false,
+              children: [{
+                id: 4,
+                label: '孙子节点',
+              }]
+            }
+          ]
+        }]
       }
     },
     components: {
       EInput,
-      ERadio
+      ERadio,
+      ETree
+    },
+    methods: {
+      handleClickNode (node) {
+        console.log(`node:${node}`)
+      }
     }
   }
 </script>
