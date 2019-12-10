@@ -1,11 +1,11 @@
 <template>
   <div>
-    <e-input placeholder="请输入账号" label-text="账户名:"></e-input>
+    <!--<e-input placeholder="请输入账号" label-text="账户名:"></e-input>
     <e-radio label="apple" v-model="fruit" disabled>苹果(大)</e-radio>
     <e-radio label="orange" v-model="fruit">橘子(小)</e-radio>
     <input type="radio" v-model="testRad" value="hello">
-    <input type="radio" v-model="testRad" value="world">
-    <e-tree :treeData="treeData" @clickNode="handleClickNode"></e-tree>
+    <input type="radio" v-model="testRad" value="world">-->
+    <e-tree :treeData="treeData" @clickNode="handleClickNode" :options="treeOptions" @onCheck="handleCheck"></e-tree>
   </div>
 </template>
 <script>
@@ -17,6 +17,10 @@
       return {
         fruit: 'apple',
         testRad: 'hello',
+        treeOptions: {
+          checkbox: true,
+          onlyLeafCheck: true
+        },
         treeData: [{
           id: 1,
           label: '根节点',
@@ -38,6 +42,16 @@
         }]
       }
     },
+    directives: {
+      focus: {
+        bind: function (el, binding) {
+          el.setAttribute()
+        },
+        inserted: function (el, binding) {
+          el.focus()
+        }
+      }
+    },
     components: {
       EInput,
       ERadio,
@@ -46,6 +60,9 @@
     methods: {
       handleClickNode (node) {
         console.log(`node:${node}`)
+      },
+      handleCheck (node) {
+        console.log(node);
       }
     }
   }

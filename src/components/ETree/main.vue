@@ -1,6 +1,6 @@
 <template>
   <div>
-    <tree-node v-for="node in treeData" :node="node" :key="node.id"></tree-node>
+    <tree-node v-for="node in treeData" :node="node" :key="node.id" :options="options"></tree-node>
   </div>
 </template>
 <script>
@@ -9,16 +9,18 @@ export default {
   componentName: 'ETree',
   data () {
     return {
-      default
+      defaultOPtions: {
+        checkbox: false,
+        onlyLeafCheck: false,
+        autoSpread: true
+      }
     }
   },
   props: {
     treeData: {
       type: Array
     },
-    options: {
-      checkbox:
-    },
+    options: Object,
     checked: {
       type: Boolean,
       default: false

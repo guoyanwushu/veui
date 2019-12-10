@@ -1,24 +1,26 @@
 <template>
   <transition name="show">
     <div class="message-container" v-show="visible" @click.self="handleWrapperClick">
-        <div class="message-box">
-          <p class="message-header">
-            <span class="message-title">{{title}}</span>
-            <i @click="closeBox" v-if="showCloseButton">X</i>
-          </p>
-          <div class="message-content">
-            <i class="iconfont type"
-               :class="{'icon-chenggong': type == 'success',
+      <div class="message-box">
+        <p class="message-header">
+          <span class="message-title">{{title}}</span>
+          <i @click="closeBox" v-if="showCloseButton">X</i>
+        </p>
+        <div class="message-content">
+          <i class="iconfont type"
+             :class="{'icon-chenggong': type == 'success',
                     'icon-jinggao': type == 'warning',
                     'icon-cuowu': type == 'error',
                     'icon-tishi': type == 'info'}" v-if="type"></i>
-            {{content}}
-          </div>
-          <div class="message-options">
-            <el-button  @click.native="closeBox" v-if="showCancelButton">{{cancelButtonText || '取消'}}</el-button>
-            <el-button  @click.native="confirmBox" v-if="showConfirmButton" :type="'primary'">{{confirmButtonText || '确定'}}</el-button>
-          </div>
+          {{content}}
         </div>
+        <div class="message-options">
+          <el-button @click.native="closeBox" v-if="showCancelButton">{{cancelButtonText || '取消'}}</el-button>
+          <el-button @click.native="confirmBox" v-if="showConfirmButton" :type="'primary'">{{confirmButtonText ||
+            '确定'}}
+          </el-button>
+        </div>
+      </div>
     </div>
   </transition>
 </template>
@@ -35,7 +37,8 @@
     name: 'alert',
     data() {
       return {
-        visible: false
+        visible: false,
+        year: 99
       }
     },
     props: {
@@ -47,7 +50,7 @@
         type: String,
       },
       title: String,
-      callback: Function,
+      confirmCallback: Function,
       cancelButtonText: String,
       confirmButtonText: String,
       showCloseButton: {
@@ -71,19 +74,25 @@
       closeBox() {
         this.visible = false
       },
-      confirmBox () {
+      confirmBox() {
         this.visible = false
-        if (this.callback) {
-          callback();
+        if (this.confirmCallback) {
+          this.confirmCallback();
         }
+      },
+      handleAction (action) {
+
+      },
+      handleWrapperClick() {
+        this.visible = false
       }
     },
-    doClose () {
+    doClose() {
       if ('') {
 
       }
     },
-    handleWrapperClick () {
+    handleWrapperClick() {
       if (this.closeOnClickModal) {
         this.visible = false
       }
@@ -149,6 +158,7 @@
       margin-left: 8px;
     }
   }
+
   .show-enter-active {
     animation: show-in .3s;
   }
