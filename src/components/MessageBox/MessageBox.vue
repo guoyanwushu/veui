@@ -15,8 +15,8 @@
           {{content}}
         </div>
         <div class="message-options">
-          <el-button @click.native="closeBox" v-if="showCancelButton">{{cancelButtonText || '取消'}}</el-button>
-          <el-button @click.native="confirmBox" v-if="showConfirmButton" :type="'primary'">{{confirmButtonText ||
+          <el-button @click.native="handleAction('cancel')" v-if="showCancelButton">{{cancelButtonText || '取消'}}</el-button>
+          <el-button @click.native="handleAction('confirm')" v-if="showConfirmButton" :type="'primary'">{{confirmButtonText ||
             '确定'}}
           </el-button>
         </div>
@@ -81,7 +81,12 @@
         }
       },
       handleAction (action) {
-
+        this.visible = false
+        if (action == 'confirm') {
+          this.resolve(action, this)
+        } else {
+          this.reject(action, this)
+        }
       },
       handleWrapperClick() {
         this.visible = false

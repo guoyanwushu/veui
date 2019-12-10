@@ -54,10 +54,11 @@
           type: 'info',
           content: '将会删除当前购物车?',
           showConfirmButton: true,
-          confirmButtonText: 'ok',
-          confirmCallback: ()=>{
-            console.log(this.year)
-          }
+          confirmButtonText: 'ok'
+        }).then(function (action, inst) {
+          console.log(action)
+        }).catch(function (action) {
+          console.log(`关闭了哦:${action}`)
         })
       }
     }
