@@ -83,10 +83,11 @@
       handleAction (action) {
         this.visible = false
         if (action == 'confirm') {
-          this.resolve(action, this)
+          this.resolve?this.resolve(action, this):''
         } else {
-          this.reject(action, this)
+          this.reject?this.reject(action, this):''
         }
+        this.callback?this.callback(action, this):''
       },
       handleWrapperClick() {
         this.visible = false

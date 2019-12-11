@@ -1,47 +1,47 @@
 <template>
-  <div>
-    <div>
-      <template v-if="type !== 'textarea'">
-        <div v-if="$slots.prepend">
-          <slot name="prepend"></slot>
-        </div>
-        <input type="text"
-               @compositionstart="handleCompositionStart"
-               @compositionupdate="handleCompositionUpdate"
-               @compositionend="handleCompositionEnd"
-               @input="handleInput"
-               @focus="handleFocus"
-               @blur="handleBlur"
-               @change="handleChange">
-        <span v-if="$slots.prefix || prefixIcon">
-          <slot name="prefix"></slot>
-          <i :class="prefixIcon" v-if="prefixIcon"></i>
-        </span>
-        <template v-if="!clearable && !showPassword && !isWordLimitVisible">
-          <slot name="afterfix"></slot>
-          <i :class="afterfixIcon" v-if="afterfixIcon"></i>
-        </template>
-        <i v-if="clearable"
-          :class=""
-          @click="clear">
-        </i>
-        <i v-if="showPassword"
-           :class=""
-           @click="handlePasswordVisible">
-        </i>
-        <div v-if="$slots.append">
-          <slot name="append"></slot>
-        </div>
+  <div class="v-input" :class="[{'v-input__focues': isFoucs}]">
+    <template v-if="type !== 'textarea'">
+      <div v-if="$slots.prepend" class="v-input__prepend">
+        <slot name="prepend"></slot>
+      </div>
+      <input type="text" v-model="value"
+         :class="{'v-input__prefix': prefixIcon, 'v-input__afterfix': afterfixIcon}"
+         @compositionstart="handleCompositionStart"
+         @compositionupdate="handleCompositionUpdate"
+         @compositionend="handleCompositionEnd"
+         @input="handleInput"
+         @focus="handleFocus"
+         @blur="handleBlur"
+         @change="handleChange"
+         :placeholder="placeholder">
+      <div v-if="$slots.prefix || prefixIcon" class="prefixWrap">
+        <slot name="prefix"></slot>
+        <i :class="prefixIcon" v-if="prefixIcon"></i>
+      </div>
+      <template v-if="!clearable && !showPassword && !isWordLimitVisible">
+        <slot name="afterfix"></slot>
+        <i :class="afterfixIcon" v-if="afterfixIcon"></i>
       </template>
-      <textarea v-if="type === 'textarea'"></textarea>
-    </div>
+      <i v-show="clearable && value"
+         class="iconfont icon-close v-input__clear"
+         @click="clear">
+      </i>
+      <i v-if="showPassword"
+         :class=""
+         @click="handlePasswordVisible">
+      </i>
+      <div v-if="$slots.append" class="v-input__append">
+        <slot name="append"></slot>
+      </div>
+    </template>
   </div>
 </template>
 <script>
   export default {
-    data () {
+    data() {
       return {
         value: this.val,
+        isFoucs: false,
         composing: false //是否正在中文输入法选词过程的标志位
       }
     },
@@ -70,30 +70,35 @@
       readonly: Boolean,
     },
     methods: {
-      handleInput (event) {
+      handleInput(event) {
         if (this.composing) return
         this.$emit('input', event.target.value)
       },
-      handleCompositionStart () {
+      handleCompositionStart() {
         this.composing = true
       },
-      handleCompositionEnd () {
+      handleCompositionEnd() {
         this.composing = false
       },
-      handlePasswordVisible () {
+      handlePasswordVisible() {
 
       },
-      handleFocus (event) {
+      handleCompositionUpdate() {
+
+      },
+      handleFocus(event) {
+        this.isFoucs = true
         this.$emit('focus', event)
       },
-      handleBlur (event) {
+      handleBlur(event) {
+        this.isFoucs = false
         this.$emit('blur', event)
       },
-      handleChange () {
+      handleChange() {
         this.$emit('change', this.value)
       },
-      clear () {
-        this.value = ''
+      clear() {
+        this.value = '';
       }
     }
   }

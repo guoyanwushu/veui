@@ -2,15 +2,20 @@
   <div class="container-full">
     <header>
       <v-button icon="icon-jinggao" type="primary" @click="alertMessage">弹出</v-button>
-      <v-button icon="icon-jinggao" type="primary" loading="true">加载中</v-button>
+      <v-button icon="icon-jinggao" type="primary" :loading="true">加载中</v-button>
       <v-button @click="alertMessage2" type="warning">弹出</v-button>
     </header>
+    <div>
+      <e-input :clearable="true">
+        <i class="iconfont icon-caidan" slot="prepend"></i>
+      </e-input>
+      <e-input placeholder="请输入用户名" prefixIcon="iconfont icon-xiayu">
+      </e-input>
+    </div>
     <article>
       <aside class="col-3">
-        <main-nav></main-nav>
       </aside>
       <section class="col-9">
-        <sub-nav></sub-nav>
         <section>
           <router-view>
           </router-view>
@@ -21,6 +26,7 @@
 </template>
 <script>
   import messageBox from '../components/MessageBox/index'
+  import EInput from '../components/EInput/input'
   import VButton from '../components/Button/index'
   export default  {
     data () {
@@ -33,7 +39,8 @@
 
     },
     components: {
-      VButton
+      VButton,
+      EInput
     },
     methods: {
       alertMessage () {
@@ -74,7 +81,7 @@
   article {
     position: absolute;
     left: 0;
-    top: 60px;
+    top: 100px;
     right: 0;
     bottom: 0;
   }

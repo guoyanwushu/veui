@@ -1,14 +1,36 @@
 @import "variable";
 .v-input {
-  outline: none;
-  height: 30px;
+  input {
+    color: #606266;
+    outline: none;
+    border: none;
+    height: 30px;
+    width: 100%;
+    padding: 0 5px;
+    box-sizing: border-box;
+    &::-webkit-input-placeholder {
+      color: #ccc;
+    }
+    &.v-input__prefix {
+      padding-left: 30px;
+    }
+    &.v-input__afterfix {
+      padding-right: 30px;
+    }
+  }
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  width: 200px;
+  align-items: center;
+  height: 40px;
   line-height: 1;
-  padding: 0 12px;
+  padding: 4px 8px;
   background-color: #fff;
   border: 1px solid #dcdfe6;
   box-sizing: border-box;
   border-radius: 3px;
-  &:focus, &:active {
+  &.v-input__focues, &:active {
     border-color: #409eff;
   }
   &:disabled {
@@ -17,8 +39,25 @@
     color: #c0c4cc;
     cursor: not-allowed;
   }
-  &::-webkit-input-placeholder {
-    color: #ccc;
+  .v-input__prepend, .v-input__append {
+    display: flex;
+    align-items: center;
+  }
+  .v-input__clear {
+    color: #c3c3c3;
+  }
+  .prefixWrap {
+    position: absolute;
+    display: inline;
+    vertical-align: middle;
+    width: 30px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    i {
+      width: 100%;
+      line-height: 40px;
+    }
   }
 }
 .v-input--required {
