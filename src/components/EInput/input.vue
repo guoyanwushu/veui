@@ -1,10 +1,10 @@
 <template>
-  <div class="v-input" :class="[{'v-input__focues': isFoucs}]">
+  <div class="v-input" :class="[{'v-input__focues': isFoucs, 'v-input__disabled': disabled}]">
     <template v-if="type !== 'textarea'">
       <div v-if="$slots.prepend" class="v-input__prepend">
         <slot name="prepend"></slot>
       </div>
-      <input type="text" v-model="value"
+      <input type="text" v-model="val"
          :class="{'v-input__prefix': prefixIcon, 'v-input__afterfix': afterfixIcon}"
          @compositionstart="handleCompositionStart"
          @compositionupdate="handleCompositionUpdate"
@@ -13,6 +13,7 @@
          @focus="handleFocus"
          @blur="handleBlur"
          @change="handleChange"
+         :disabled="disabled"
          :placeholder="placeholder">
       <div v-if="$slots.prefix || prefixIcon" class="prefixWrap">
         <slot name="prefix"></slot>
@@ -40,13 +41,17 @@
   export default {
     data() {
       return {
-        value: this.val,
         isFoucs: false,
+        val: this.value,
         composing: false //是否正在中文输入法选词过程的标志位
       }
     },
+    model: {
+      prop: 'value',
+      event: 'input'
+    },
     props: {
-      val: String,
+      value: String,
       labelText: String,
       type: {
         default: 'text',
@@ -68,6 +73,11 @@
       disabled: Boolean,
       required: Boolean,
       readonly: Boolean,
+    },
+    watch: {
+      value: function (newVal, oldVal) {
+        this.val = newVal
+      }
     },
     methods: {
       handleInput(event) {

@@ -9,8 +9,14 @@
       <e-input :clearable="true">
         <i class="iconfont icon-caidan" slot="prepend"></i>
       </e-input>
-      <e-input placeholder="请输入用户名" prefixIcon="iconfont icon-xiayu">
+      <e-input placeholder="请输入用户名" prefixIcon="iconfont icon-xiayu" v-model="username">
       </e-input>
+      <e-input placeholder="请输入用户名" prefixIcon="iconfont icon-xiayu" :disabled="true">
+      </e-input>
+      <v-select
+        :options="list"
+        v-model="fruit"
+      ></v-select>
     </div>
     <article>
       <aside class="col-3">
@@ -28,11 +34,24 @@
   import messageBox from '../components/MessageBox/index'
   import EInput from '../components/EInput/input'
   import VButton from '../components/Button/index'
+  import VSelect from '../components/VSelect/main'
   export default  {
     data () {
       return {
         status: false,
-        year: 100
+        year: 100,
+        fruit: 2,
+        username: '王大锤',
+        list: [{
+          id:1,
+          text: '橘子'
+        }, {
+          id: 2,
+          text: '香蕉'
+        }, {
+          id: 3,
+          text: '芒果'
+        }]
       }
     },
     mounted () {
@@ -40,7 +59,8 @@
     },
     components: {
       VButton,
-      EInput
+      EInput,
+      VSelect
     },
     methods: {
       alertMessage () {
@@ -81,7 +101,7 @@
   article {
     position: absolute;
     left: 0;
-    top: 100px;
+    top: 800px;
     right: 0;
     bottom: 0;
   }

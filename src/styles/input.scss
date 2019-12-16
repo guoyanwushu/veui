@@ -4,7 +4,7 @@
     color: #606266;
     outline: none;
     border: none;
-    height: 30px;
+    line-height: 40px;
     width: 100%;
     padding: 0 5px;
     box-sizing: border-box;
@@ -25,7 +25,6 @@
   align-items: center;
   height: 40px;
   line-height: 1;
-  padding: 4px 8px;
   background-color: #fff;
   border: 1px solid #dcdfe6;
   box-sizing: border-box;
@@ -62,6 +61,12 @@
 }
 .v-input--required {
   border-color: $--color-danger;
+}
+.v-input__disabled {
+  input {
+    background-color: #c0c0c030;
+    cursor: not-allowed;
+  }
 }
 .v-input__label {
   position: relative;
