@@ -14,6 +14,7 @@
          @blur="handleBlur"
          @change="handleChange"
          :disabled="disabled"
+         :readonly="readonly"
          :placeholder="placeholder">
       <div v-if="$slots.prefix || prefixIcon" class="prefixWrap">
         <slot name="prefix"></slot>

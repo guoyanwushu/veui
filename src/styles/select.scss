@@ -17,12 +17,22 @@
     text-align: left;
     cursor: pointer;
     color: #606266;
-    &:hover {
+    &.v-select__available:hover {
       background-color: #f5f7fa;
     }
     &.v-select__active {
       background-color: #f5f7fa;
+    }
+    &.v-select__selected {
       color: #66b1ff;
+    }
+    &.v-select__disabled {
+      cursor: not-allowed;
+      color: #c0c4cc;
+    }
+    .v-select__multicheck {
+      float: right;
+      padding: 0 10px;
     }
   }
   .v-select__arrow {
