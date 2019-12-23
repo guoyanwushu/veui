@@ -1,11 +1,11 @@
 <template>
-  <div class="v-select--wrap">
-    <e-input type="text" @focus="focus" :value="val" :readonly="true" v-if="!multi"></e-input>
-    <e-input type="text" @focus="focus" :value="multiText.join(',')" :readonly="true" v-if="multi"></e-input>
+  <div class="v-select--wrap" ref="select">
+    <e-input type="text" @focus="focus" :value="val" :readonly="!searchable" v-if="!multi" @input="filterOptions" @blur="blur"></e-input>
+    <e-input type="text" @focus="focus" :value="multiText.join(',')" :readonly="!searchable" v-if="multi" @blur="blur"></e-input>
     <ul v-show="isActive" class="v-select__options" @mouseenter="isSelecting=true" @mouseleave="isSelecting=false">
       <div class="v-select__arrow"></div>
       <template v-if="!multi">
-        <li v-for="item in options"
+        <li v-for="item in showoptions"
             :key="item[valueField]"
             @click="selectItem(item)"
             @mouseenter="isHover=true"
@@ -16,9 +16,10 @@
                     'v-select__available': !item.disabled}">
           <slot name="options" v-bind:optionItem="item">{{item[textField]}}</slot>
         </li>
+        <li v-if="!showoptions.length"><span>暂无数据...</span></li>
       </template>
       <template v-else>
-        <li v-for="item in options"
+        <li v-for="item in showoptions"
             :key="item[valueField]"
             @click="handelMultiChoose(item)"
             @mouseenter="isHover=true"
@@ -47,7 +48,8 @@
         val: this.value,
         multiValue: [],
         multiText: [],
-        isHover: false
+        isHover: false,
+        showoptions: this.options
       }
     },
     components: {
@@ -67,6 +69,10 @@
       selectedValue: '',
       value: String,
       options: Array,
+      searchable: {
+        type: Boolean,
+        default: false
+      },
       textField: {
         type: String,
         default: 'text'
@@ -88,9 +94,14 @@
       event: 'select'
     },
     methods: {
+      filterOptions : function (val) {
+        console.log('inputing....')
+        this.showoptions = this.options.filter(function (item) {
+          console.log(item);
+          return item.text.indexOf(val) > -1
+        })
+      },
       selectItem(item) {
-        // 要提供钩子给外部
-        console.log(item)
         if (item.disabled) {
           return
         }
@@ -111,7 +122,7 @@
         this.$emit('select', this.multiValue);
       },
       focus() {
-        this.isActive = true
+        this.isActive = true;
       },
       blur() {
         this.isActive = false

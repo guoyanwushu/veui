@@ -16,7 +16,8 @@
       <v-select
         :options="list"
         v-model="fruit"
-        :multi="true"
+        :multi="false"
+        :searchable="true"
       >
         <template #options="{optionItem}">{{optionItem.text+'--※'}}</template>
       </v-select>
@@ -43,8 +44,9 @@
       return {
         status: false,
         year: 100,
-        fruit: [2,3],
+        fruit: 2,
         username: '王大锤',
+        _options: this.options,
         list: [{
           id:1,
           text: '橘子',
@@ -54,7 +56,7 @@
           text: '香蕉'
         }, {
           id: 3,
-          text: '芒果'
+          text: '芒果',
         }]
       }
     },
