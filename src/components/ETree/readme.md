@@ -3,3 +3,4 @@
    事件，就会影响到展开和收缩的功能
 3. tree-node 本身是一个嵌套自身的组件，怎么把tree-node的事件抛到e-tree上面去
     利用dispatch， 一级一级找， 直到找到Tree组件， 然后在Tree上emit事件
+

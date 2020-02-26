@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+          content="width=device-width, initial-scale=2.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
@@ -14,27 +14,31 @@
             margin-bottom: 40px;
             box-sizing: border-box;
         }
+
         #d2 {
             width: 100px;
             height: 100px;
             margin-bottom: 10px;
             position: relative;
         }
+
         #d2:after {
             content: '';
             position: absolute;
             left: 0;
-            bottom:0;
+            bottom: 0;
             width: 100%;
             transform-origin: left bottom;
             border-bottom: 1px solid #000;
             transform: scaleY(0.5);
         }
+
         #d3 {
             width: 100px;
             height: 100px;
             position: relative;
         }
+
         #d3:before {
             content: '';
             position: absolute;
@@ -44,13 +48,116 @@
             top: -50%;
             border: 1px solid #000;
             transform: scale(0.5);
+        }
 
+        .arrow {
+            width: 0;
+            height: 0;
+            position: relative;
+            border: 10px solid #66b1ff;
+            border-top-width: 0px;
+            border-right-color: transparent;
+            border-left-color: transparent;
+        }
+
+        .arrow:after {
+            content: '';
+            left: -10px;
+            top: 2px;
+            position: absolute;
+            width: 0;
+            height: 0;
+            border: 10px solid #fff;
+            border-top-width: 0px;
+            border-right-color: transparent;
+            border-left-color: transparent;
+        }
+
+        .test {
+            width: 40px;
+            height: 20px;
+            background-color: #cccccc;
+            margin-bottom: 10px;
+        }
+
+        .box {
+            display: flex;
+        }
+
+        .left {
+            width: 300px;
+            float: left;
+        }
+
+        .right {
+            display: block;
+            height: 80px;
+            background-color: #ccc;
         }
     </style>
 </head>
 <body>
-    <div id="d1"></div>
-    <div id="d2"></div>
-    <div id="d3"></div>
+<!--<div id="d1"></div>
+<div id="d2"></div>
+<div id="d3"></div>
+<div class="arrow"></div>-->
+<div>
+        <span class="left">
+            what are you chou sha ne hhh
+        </span>
+    <div class="right">
+        HSK, whatever you do, whatever you say.
+    </div>
+</div>
 </body>
+<script>
+    var length = 100000;
+    /*var str = ''
+    for (var i =0;i<length;i++) {
+        str +='<div id="div'+i+'" class="test" index="'+i+'"></div>'
+    }
+    console.time('render');
+    var d1 = Date.now();
+    document.body.innerHTML = str;
+    console.log('插入执行:'+(Date.now()-d1))
+    console.timeEnd('render');
+    console.time('print');
+    console.log(document.getElementById('div99999').getAttribute('index'))
+    console.log('打印执行'+(Date.now()-d1))
+    console.timeEnd('print');*/
+
+    /*    for (var i=0; i< length ;i++) {
+
+            console.log(document.getElementById('div500'))
+        }*/
+    function _instanceof(A, B) {
+        var d = Object.getPrototypeOf(A);
+        while (d) {
+            if (d === B.prototype) return true
+            d = Object.getPrototypeOf(d)
+        }
+        return false
+    }
+
+    // Application principle tool
+    // understand is importer than memory
+    Function.prototype._call = function (context, ...args) {
+        var func = Symbol('func');
+        context = context || window;
+        context[func] = this;
+        var result = context[func](...args);
+        delete context[func]
+        return result
+    }
+    // 如果返回的函数被用做了构造函数， 还要忽视掉传进去的context
+    Function.prototype._bind = function (context, ...args) {
+        context = context || window;
+        var self = this;
+        var func = function () {
+            return self.apply(this instanceof func ? this : context, [...arguments, ...args])
+        }
+        func.prototype = self.prototype
+        return func
+    }
+</script>
 </html>
