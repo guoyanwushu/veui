@@ -18,12 +18,26 @@ export default {
       }
     }
   },
+  provide () {
+    return {
+      defaultSpread: this.defaultSpread,
+      checkbox: this.checkbox
+    }
+  },
   props: {
     treeData: {
       type: Array
     },
     options: Object,
     checked: {
+      type: Boolean,
+      default: false
+    },
+    defaultSpread: {
+      type: Boolean,
+      default: false
+    },
+    checkbox: {
       type: Boolean,
       default: false
     }

@@ -5,7 +5,7 @@
     <e-radio label="orange" v-model="fruit">橘子(小)</e-radio>
     <input type="radio" v-model="testRad" value="hello">
     <input type="radio" v-model="testRad" value="world">-->
-    <e-tree :treeData="treeData" @clickNode="handleClickNode" :options="treeOptions" @onCheck="handleCheck"></e-tree>
+    <e-tree :treeData="treeData" @clickNode="handleClickNode" :options="treeOptions" @onCheck="handleCheck" :defaultSpread="true" :checkbox="true"></e-tree>
   </div>
 </template>
 <script>
@@ -24,18 +24,26 @@
         treeData: [{
           id: 1,
           label: '根节点',
+          checked: true,
           children: [
             {
               id: 2,
-              label: '子节点'
+              label: '子节点',
+              checked: true,
             },
             {
               id: 3,
               label: '子节点2',
               spread: false,
+              checked: true,
               children: [{
                 id: 4,
-                label: '孙子节点',
+                label: '孙子节点1',
+                checked: true,
+              }, {
+                id: 5,
+                label: '孙子节点2',
+                checked: true
               }]
             }
           ]
