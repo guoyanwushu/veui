@@ -28,6 +28,13 @@ export default {
       partChecked: false
     }
   },
+  watch: {
+    'pchecked': function (newVal, oldVal) {
+      if (newVal == 1 || newVal == 0) {
+        this.checked = newVal
+      }
+    }
+  },
   inject: ['defaultSpread', 'checkbox'],
   methods: {
     spreadNode() {
