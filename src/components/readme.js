@@ -19,7 +19,7 @@ var instance = new constructor({
 export default {
   data () {
     return {
-      name: "王大锤"
+      name: "王小锤"
     }
   },
   render (h) {
