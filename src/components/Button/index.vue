@@ -1,6 +1,6 @@
 <template>
   <button type="button"
-          :class="['v-button', 'el-btn--size_'+size?size:'normal', 'v--button--'+type, {isLoading: loading, isdisabled: disabled}]"
+          :class="['v-button', size?'v-btn--'+size:'', type?'v-button--'+type:'', {isLoading: loading, isdisabled: disabled}, {'v-button-round': round}]"
           :disabled='disabled'
           @click="handleClick"
   >
@@ -13,14 +13,25 @@
   export default {
     name: 'VButton',
     props: {
-      disabled: Boolean,
-      loading: Boolean,
+      round: String,
+      disabled: {
+        type: Boolean,
+        default: false
+      },
+      loading: {
+        type: Boolean,
+        default: false
+      },
       icon: String,
       size: String,
+      round: Boolean,
       type: {
         type: String,
         default: 'default'
       },
+    },
+    mounted () {
+      console.log(this.round, this.$attrs)
     },
     methods: {
       handleClick() {

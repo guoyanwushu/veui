@@ -1,22 +1,38 @@
 @import "variable";
 @import "mixins/button";
-button {
-  border: none;
-  outline: none;
-  background-color: #fff;
-  cursor: pointer;
-}
 .v-button {
   -webkit-tap-highlight-color: transparent;
-  border: 1px solid #ccc;
-  border-radius: 3px;
+  -webkit-appearance: none;
+  cursor: pointer;
+  white-space: nowrap;
+  box-sizing: border-box;
+  line-height: 1;
+  font-weight: 500;
+  font-size: 14px;
+  color: #606266;
+  background-color: #fff;
+  border: 1px solid #dcdfe6;
+  border-radius: 4px;
+  outline: none;
   display: inline-block;
-  padding: 5px 10px;
+  padding: 12px 20px;
+  &:focus, &:hover {
+    color: #409eff;
+    border-color: #c6e2ff;
+    background-color: #ecf5ff;
+  }
+  &:active {
+    border-color: #3a8ee6;
+  }
   &.isLoading {
     pointer-events: none;
   }
   &.isdisabled {
+    color: #c0c4cc;
     cursor: not-allowed;
+    background-image: none;
+    background-color: #fff;
+    border-color: #ebeef5;
   }
   .iconfont {
     display: inline-block;
@@ -28,6 +44,42 @@ button {
     height: 14px;
     transform-origin: center center;
     animation: rotating 4s linear infinite;
+  }
+}
+.v-btn--medium {
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 4px;
+}
+.v-btn--small {
+  padding: 9px 15px;
+  font-size: 12px;
+  border-radius: 3px;
+}
+.v-btn--mini {
+  padding: 7px 15px;
+  font-size: 12px;
+  border-radius: 3px;
+}
+.v-button-round {
+  border-radius: 50%;
+}
+.v-button-group {
+  .v-button:not(:first-child):not(:last-child) {
+    border-radius: 0;
+  }
+  .v-button:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .v-button:last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .v-button + .v-button {
+    margin-left: -1px;
+    /*border-left-color: hsla(0,0%,100%,.5);*/
+    border-left-color: rgba(255, 255, 255, .5);
   }
 }
 @keyframes rotating {
@@ -43,16 +95,19 @@ button {
 .v-icon-right {
   padding-left: 5px;
 }
-.v--button--default {
-  @include button-plain($--color-info)
+.v-button--info {
+  @include button-plain($--color--info)
 }
-.v--button--primary {
+.v-button--success {
+  @include button-plain($--color--success)
+}
+.v-button--primary {
   @include button-plain($--color--primary)
 }
-.v--button--warning {
-  @include button-plain($--color-warning)
+.v-button--warning {
+  @include button-plain($--color--warning)
 }
-.v--button--danger {
-  @include button-plain($--color-danger)
+.v-button--danger {
+  @include button-plain($--color--danger)
 }
 

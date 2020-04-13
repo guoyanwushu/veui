@@ -1,6 +1,6 @@
 <template>
   <div class="node-container">
-    <div class="main-content">
+    <d-v class="main-content">
       <p class="node-label" @click="handleClick">
         <i class="iconfont icon-jia" v-show="!spread && node.children" @click.stop="spreadNode"></i>
         <i class="iconfont icon-jian" v-show="spread && node.children" @click.stop="shrinkNode"></i>
@@ -13,7 +13,7 @@
       <div v-show="node.children && spread" class="children-wrapper">
         <tree-node v-for="childnode in node.children" :node="childnode" :key="childnode.id" :options="options" :pchecked="checked"></tree-node>
       </div>
-    </div>
+    </d-v>
   </div>
 </template>
 <script>
@@ -23,8 +23,8 @@ export default {
   componentName: 'TreeNode',
   data () {
     return {
-      spread:  this.defaultSpread,
-      checked: (this.pchecked == 1 || this.partChecked == 0)?this.pchecked:(+this.node.checked),
+      spread: this.defaultSpread,
+      checked: (this.pchecked == 1 || this.partChecked == 0) ? this.pchecked : (+this.node.checked),
       partChecked: false
     }
   },
@@ -46,7 +46,7 @@ export default {
     handleCheckbox () {
       this.checked = +(!this.checked);
       if (this.$parent && this.$parent.$options.componentName === 'TreeNode') {
-        this.checked?this.$parent.childcheck():this.$parent.childuncheck()
+          this.checked?this.$parent.childcheck():this.$parent.childuncheck()
       }
     },
     childcheck () {

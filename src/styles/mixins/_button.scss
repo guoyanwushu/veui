@@ -3,7 +3,7 @@
   background-color: $color;
   border-color: $color;
   color: $--color--white;
-  &:hover {
+  &:hover, &:focus  {
     background-color: mix($--color--white, $color, 20%);
     border-color: mix($--color--white, $color, 60%);
     color: $--color--white;

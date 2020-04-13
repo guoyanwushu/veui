@@ -1,10 +1,50 @@
 <template>
   <div class="container-full">
-    <header>
-      <v-button icon="icon-jinggao" type="primary" @click="alertMessage">弹出</v-button>
+    <!--<header>
+      <v-button icon="icon-jinggao" type="primary" @click="alertMessage" round>弹出</v-button>
       <v-button icon="icon-jinggao" type="primary" :loading="true">加载中</v-button>
       <v-button @click="alertMessage2" type="warning">弹出</v-button>
-    </header>
+    </header>-->
+    <section>
+      <h2>按钮</h2>
+      <p>尺寸</p>
+      <div>
+        <v-button>默认尺寸</v-button>
+        <v-button size="medium">中型按钮</v-button>
+        <v-button size="small">小型按钮</v-button>
+        <v-button size="mini">最小型按钮</v-button>
+      </div>
+      <p>类型</p>
+      <div>
+        <v-button>默认按钮</v-button>
+        <v-button type="info">默认按钮</v-button>
+        <v-button type="primary">主要按钮</v-button>
+        <v-button type="success">成功按钮</v-button>
+        <v-button type="warning">警告按钮</v-button>
+        <v-button type="danger">危险按钮</v-button>
+      </div>
+      <p>状态</p>
+      <div>
+        <v-button disabled>默认按钮</v-button>
+        <v-button type="info" disabled>信息按钮</v-button>
+        <v-button type="primary" disabled>主要按钮</v-button>
+        <v-button type="success" disabled>成功按钮</v-button>
+        <v-button type="warning" disabled>警告按钮</v-button>
+        <v-button type="danger" disabled>危险按钮</v-button>
+      </div>
+      <p>按钮组</p>
+      <div>
+        <v-button-group>
+          <v-button type="primary">按钮一</v-button>
+          <v-button type="primary">按钮二</v-button>
+        </v-button-group>
+        <v-button-group>
+          <v-button type="primary">按钮一</v-button>
+          <v-button type="primary">按钮二</v-button>
+          <v-button type="primary">按钮三</v-button>
+        </v-button-group>
+      </div>
+    </section>
     <div>
       <e-input :clearable="true">
         <i class="iconfont icon-caidan" slot="prepend"></i>
@@ -38,6 +78,7 @@
   import messageBox from '../components/MessageBox/index'
   import EInput from '../components/EInput/input'
   import VButton from '../components/Button/index'
+  import VButtonGroup from '../components/Button/button-group'
   import VSelect from '../components/VSelect/main'
   export default  {
     data () {
@@ -65,6 +106,7 @@
     },
     components: {
       VButton,
+      VButtonGroup,
       EInput,
       VSelect
     },
@@ -98,6 +140,12 @@
   }
 </script>
 <style lang="scss">
+  .v-button + .v-button{
+    margin-left: 10px;
+  }
+  .v-button-group + .v-button-group {
+    margin-top: 10px;
+  }
   header {
     height: 60px;
   }
