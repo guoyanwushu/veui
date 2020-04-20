@@ -6,3 +6,4 @@
    v-model变量等于value属性的时候，单选框就是选中状态，当v-model不等于value属性值的时候，单选框就是未选中状态。当有多个单选框的值的时候，如果用同一个变量进行v-model绑定，那么这个
    变量的值就是选中的那个radio的value属性，初始化也是一样的道理。
 4. radio本身的v-model就实现了 同一个v-model的所有radio状态同步问题， 这个应该是vue内部的机制实现的。 然后要二次封装， 还要继续维护这种同步关系就要稍微考虑一下
+5. 组件的v-model实际上是v-bind:value v-on:input 的语法糖， 所以组件里一定要有value的prop属性，不然value落不下去。然后更新的时候，一定要 $emit('input', newValue)

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import layout from './views/layout'
 import Test from './views/Test'
+import Radio from './views/radio'
 Vue.use(Router)
 
 export default new Router({
@@ -10,6 +11,11 @@ export default new Router({
       path: '/',
       name: 'layout',
       component: layout
+    },
+    {
+      path: '/radio',
+      name: 'Radio',
+      component: Radio
     },
     {
       path: '/test',

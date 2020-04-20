@@ -105,7 +105,7 @@
     }
   }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   .message-container {
     position: absolute;
     left: 0;

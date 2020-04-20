@@ -1,12 +1,12 @@
 <template>
-  <div class="v-button-group">
+  <div>
     <slot></slot>
   </div>
 </template>
 <script>
 export default {
-  name: 'VButonGrop'
+  name: 'radio-group',
+  componentName: 'radio-group',
+  props: ['value']
 }
 </script>
-<style lang="less">
-</style>

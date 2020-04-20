@@ -1,6 +1,6 @@
 <template>
   <div class="node-container">
-    <d-v class="main-content">
+    <div class="main-content">
       <p class="node-label" @click="handleClick">
         <i class="iconfont icon-jia" v-show="!spread && node.children" @click.stop="spreadNode"></i>
         <i class="iconfont icon-jian" v-show="spread && node.children" @click.stop="shrinkNode"></i>
@@ -13,7 +13,7 @@
       <div v-show="node.children && spread" class="children-wrapper">
         <tree-node v-for="childnode in node.children" :node="childnode" :key="childnode.id" :options="options" :pchecked="checked"></tree-node>
       </div>
-    </d-v>
+    </div>
   </div>
 </template>
 <script>

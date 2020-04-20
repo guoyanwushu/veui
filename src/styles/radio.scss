@@ -1,0 +1,42 @@
+@import "./variable";
+.v-radio {
+  margin-right: 30px;
+}
+.v-radio--wrap {
+  position: relative;
+  line-height: 30px;
+  vertical-align: middle;
+  .v-radio--input {
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    visibility: hidden;
+  }
+  .v-radio--icon {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 7px;
+    box-sizing: border-box;
+    border: 1px solid $--color--info;
+    &.selected {
+      background-color: #fff;
+      border: 5px solid $--color--primary
+    }
+    &.disabled {
+      border-color: #ccc;
+      color: #c0c4cc;
+    }
+  }
+}
+.v-radio--label {
+  font-size: 14px;
+  padding-left: 10px;
+  color: #606266;
+  &.selected {
+    color: $--color--primary;
+  }
+  &.disabled {
+    color: #c0c4cc;
+  }
+}

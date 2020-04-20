@@ -1,29 +1,50 @@
 <template>
-  <label>
+  <label class="v-radio">
     <span class="v-radio--wrap">
-      <input type="radio" class="v-radio" @change="handelChange" v-model="model" ref="radio" :value="label" :disabled="disabled">
-      <span class="v-radio--icon"></span>
+      <input type="radio" class="v-radio--input" @change="handelChange" v-model="model" ref="radio" :value="label" :disabled="disabled">
+      <span :class="['v-radio--icon', {selected: model === label, disabled: disabled}]"></span>
     </span>
-    <slot></slot>
-    <span class="v-radio--label" v-if="!$slots.default">{{label}}</span>
+    <span :class="['v-radio--label', {selected: model === label && !disabled, disabled: disabled}]"><slot></slot></span>
+    <span class="v-radio--label" v-if="!$slots.default" :class="{selected: model === label}">{{label}}</span>
   </label>
 </template>
 <script>
+  import {dispatch} from "../../util";
+
   export default {
     name: 'ERadio',
+    data () {
+      return {
+        radioGroup: null
+      }
+    },
     props: {
       value: String,
       label: String,
-      disabled: Boolean
+      disabled: Boolean,
     },
     computed: {
+      inGroup () {
+        var parent = this.$parent
+        var _inGroup = false
+        while (parent) {
+          if (parent.$options.name === 'radio-group') {
+            _inGroup = true
+            this.radioGroup = parent
+            break
+          } else {
+            parent = parent.$parent
+          }
+        }
+        return _inGroup
+      },
       model: {
         get() {
-          return this.value
+          console.log(this.inGroup, this.radioGroup);
+          return this.inGroup ? this.radioGroup.value : this.value
         },
         set(value) {
-          console.log(value);
-          this.$emit('input', value);
+          this.inGroup ? dispatch.call(this, 'radio-group', 'input', value) : this.$emit('input', value)
           if (value === this.label) {
             this.$refs.radio.checked = true;
           }
@@ -37,40 +58,4 @@
     }
   }
 </script>
-<style lang="scss">
-  @import "../../styles/variable";
 
-  .v-radio--wrap {
-    position: relative;
-    line-height: 30px;
-    vertical-align: middle;
-  }
-
-  .v-radio--icon {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-
-    border-radius: 8px;
-    box-sizing: border-box;
-    border: 1px solid $--color--primary;
-  }
-
-  .v-radio--label {
-    margin-left: 14px;
-  }
-
-  .v-radio {
-    width: 16px;
-    height: 16px;
-    position: absolute;
-    visibility: hidden;
-    &:checked + .v-radio--icon {
-      background-color: #fff;
-      border: 5px solid $--color--primary
-    }
-    &:disabled + .v-radio--icon {
-      border-color: #ccc;
-    }
-  }
-</style>
